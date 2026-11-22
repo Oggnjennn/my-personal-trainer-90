@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101512">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MY PT 90">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>MY PERSONAL TRAINER · 90</title>
+<style>
+:root{--bg:#0c100e;--panel:#151c18;--panel2:#1d2821;--line:#29372e;--text:#f2f7f3;--muted:#a3b2a8;--green:#7be39a;--green2:#1f8b4c;--amber:#f4c56a;--red:#ff8585}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:calc(82px + env(safe-area-inset-bottom))}
+header{padding:22px 18px 14px;background:linear-gradient(145deg,#17231b,#0c100e)}.eyebrow{color:var(--green);font-size:11px;font-weight:800;letter-spacing:2px}.brand{font-size:25px;font-weight:900;letter-spacing:-.8px;margin:5px 0}.sub{color:var(--muted);font-size:13px}
+main{max-width:760px;margin:auto;padding:14px}.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:15px}.stat small,.muted{color:var(--muted)}.stat strong{display:block;font-size:25px;margin-top:5px}.section-title{font-size:18px;margin:22px 2px 10px;font-weight:800}.tabs{position:fixed;z-index:5;bottom:0;left:0;right:0;background:#111814;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:9px 4px calc(9px + env(safe-area-inset-bottom))}.tabs button{background:none;border:0;color:var(--muted);font-size:11px;padding:5px;flex:1}.tabs button.active{color:var(--green)}.tabs span{display:block;font-size:20px;margin-bottom:3px}
+button,.btn{border:0;border-radius:12px;background:var(--green);color:#092012;font-weight:800;padding:12px 14px;font-size:14px;cursor:pointer}.btn.secondary,button.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}.btn.full{width:100%;margin-top:10px}.daylist{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.daybtn{padding:10px 4px;background:var(--panel2);color:var(--muted);border:1px solid var(--line)}.daybtn.selected{background:#1d6339;color:white;border-color:#3b9b5d}.tag{display:inline-block;background:#203a29;color:var(--green);border-radius:99px;padding:5px 9px;font-size:11px;font-weight:800}.exercise{padding:13px 0;border-bottom:1px solid var(--line)}.exercise:last-child{border:0}.exercise strong{display:block}.exercise small{color:var(--muted);display:block;margin:5px 0 9px;line-height:1.4}.check{display:flex;align-items:center;gap:9px;color:var(--green);font-size:13px}.check input{width:19px;height:19px;accent-color:#54d982}.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.field{margin:12px 0}.field label{display:block;color:var(--muted);font-size:13px;margin-bottom:6px}.field input,.field textarea,.field select{width:100%;background:#0d130f;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px;font:inherit}.field textarea{min-height:75px}.progress{height:9px;background:#26332b;border-radius:20px;overflow:hidden}.progress div{height:100%;background:var(--green);width:0}.notice{border-left:3px solid var(--amber);padding:10px 12px;background:#272217;border-radius:8px;color:#f3dfb5;font-size:13px;line-height:1.5}.coach{background:linear-gradient(135deg,#193d28,#17231b);border:1px solid #326344;border-radius:17px;padding:16px;line-height:1.5}.hidden{display:none}.metric{font-size:12px;color:var(--muted)}.log{border-bottom:1px solid var(--line);padding:10px 0}.tiny{font-size:11px;color:var(--muted)}h2{font-size:19px;margin:0 0 8px}h3{font-size:16px;margin:0 0 8px}
+</style>
+</head>
+<body>
+<header><div class="eyebrow">YOUR HOME FITNESS SYSTEM</div><div class="brand">MY PERSONAL TRAINER <span style="color:var(--green)">90</span></div><div class="sub">12 nedelja · trening snage · traka · praćenje napretka</div></header>
+<main>
+<section id="home">
+ <div class="stats">
+  <div class="stat"><small>TELESNA TEŽINA</small><strong id="topWeight">111 kg</strong><small>Poslednji unos</small></div>
+  <div class="stat"><small>PLAN</small><strong>12 nedelja</strong><small>5 treninga nedeljno</small></div>
+  <div class="stat"><small>ZAVRŠENI TRENING</small><strong id="doneCount">0 / 5</strong><small>Ove nedelje</small></div>
+  <div class="stat"><small>TRAJANJE</small><strong>45 min</strong><small>Po treningu</small></div>
+ </div>
+ <div class="section-title">Današnji trener</div>
+ <div class="coach"><div class="tag">MY PT COACH</div><p id="coachMessage" style="margin-bottom:0">Dobrodošao! Izaberi današnji trening, radi kontrolisano i zabeleži kako si se osećao. Doslednost je važnija od forsiranja.</p></div>
+ <div class="section-title">Nedeljni raspored</div>
+ <div id="weekSummary"></div>
+ <div class="section-title">Brzi podsetnik</div>
+ <div class="notice">Prekini trening ako osetiš bol u grudima, vrtoglavicu, neuobičajenu zadihanost ili oštar bol. Traka: koristi sigurnosni klip i ne povećavaj brzinu ako ne možeš stabilno da hodaš.</div>
+</section>
+
+<section id="workout" class="hidden">
+ <div class="section-title" style="margin-top:4px">Tvoj trening</div>
+ <div class="daylist" id="dayButtons"></div>
+ <div class="card" style="margin-top:12px">
+  <div class="row"><span class="tag" id="dayType">SNAGA A</span><span class="tiny" id="dayTime">45 minuta</span></div>
+  <h2 id="dayName" style="margin-top:10px">Ponedeljak</h2><div class="muted" id="dayFocus"></div>
+  <div class="section-title">Vežbe</div><div id="exerciseList"></div>
+  <div class="section-title">Traka / kardio</div><div id="cardioPlan"></div>
+  <button class="btn full" id="completeWorkout">Označi trening kao završen</button>
+  <div class="tiny" id="workoutStatus" style="margin-top:8px"></div>
+ </div>
+</section>
+
+<section id="progress" class="hidden">
+ <div class="section-title" style="margin-top:4px">Praćenje napretka</div>
+ <div class="card">
+  <h3>Novi nedeljni unos</h3>
+  <div class="field"><label>Težina (kg)</label><input id="weightInput" type="number" step=".1" value="111"></div>
+  <div class="field"><label>Obim struka (cm)</label><input id="waistInput" type="number" step=".5" placeholder="npr. 105"></div>
+  <div class="field"><label>Prosečan broj koraka dnevno (opciono)</label><input id="stepsInput" type="number" placeholder="npr. 6500"></div>
+  <div class="field"><label>Kako se osećaš? (1 = veoma lako, 10 = maksimalno teško)</label><input id="rpeInput" type="range" min="1" max="10" value="6" oninput="document.getElementById('rpeValue').textContent=this.value"><b id="rpeValue">6</b>/10</div>
+  <div class="field"><label>Beleške</label><textarea id="notesInput" placeholder="Energija, san, bolovi, šta je bilo teško..."></textarea></div>
+  <button class="btn full" id="saveEntry">Sačuvaj merenje</button>
+ </div>
+ <div class="section-title">Istorija</div><div class="card" id="history"><div class="muted">Još nema unosa.</div></div>
+</section>
+
+<section id="coach" class="hidden">
+ <div class="section-title" style="margin-top:4px">AI trener · dnevna procena</div>
+ <div class="card">
+  <h3>Kako si danas?</h3>
+  <div class="field"><label>Energija</label><select id="energy"><option value="high">Dobra</option><option value="mid" selected>Prosečna</option><option value="low">Niska</option></select></div>
+  <div class="field"><label>Mišićna upala</label><select id="soreness"><option value="none">Nema</option><option value="mild" selected>Blaga</option><option value="high">Jaka</option></select></div>
+  <div class="field"><label>San</label><select id="sleep"><option value="good">Dobar (7+ sati)</option><option value="average" selected>Prosečan (6–7 sati)</option><option value="poor">Loš (manje od 6 sati)</option></select></div>
+  <button class="btn full" id="getAdvice">Proceni moj trening</button>
+  <div id="advice" class="coach" style="margin-top:14px">Popuni procenu i trener će ti dati preporuku za današnji intenzitet.</div>
+ </div>
+ <div class="section-title">Važno</div>
+ <div class="notice">Ovaj trener koristi unapred definisana pravila za oporavak i progresiju. Nije medicinski uređaj niti zamena za lekara, a nije povezan sa spoljnim AI servisom.</div>
+</section>
+
+<section id="settings" class="hidden">
+ <div class="section-title" style="margin-top:4px">Podešavanja</div>
+ <div class="card">
+  <div class="field"><label>Ime programa</label><input value="MY PERSONAL TRAINER 90" disabled></div>
+  <div class="field"><label>Početna težina (kg)</label><input id="startWeight" type="number" value="111"></div>
+  <div class="field"><label>Trenutna težina (kg)</label><input id="currentWeight" type="number" value="111"></div>
+  <div class="field"><label>Nivo</label><select><option>Intermediate</option><option>Početnik</option><option>Napredni</option></select></div>
+  <button class="btn full" id="saveSettings">Sačuvaj podešavanja</button>
+  <button class="btn secondary full" id="exportData">Izvezi moje podatke (JSON)</button>
+  <button class="btn secondary full" id="resetData" style="color:#ff9999">Obriši sve podatke</button>
+ </div>
+ <p class="tiny">Podaci se čuvaju lokalno u ovom pregledaču na tvom uređaju. Izvozom napravi rezervnu kopiju.</p>
+</section>
+</main>
+<nav class="tabs">
+ <button class="active" data-tab="home"><span>⌂</span>Početna</button>
+ <button data-tab="workout"><span>◉</span>Trening</button>
+ <button data-tab="progress"><span>▥</span>Napredak</button>
+ <button data-tab="coach"><span>✦</span>Trener</button>
+ <button data-tab="settings"><span>⚙</span>Više</button>
+</nav>
+<script>
+const plans=[
+{name:"Ponedeljak",short:"PON",type:"SNAGA A",focus:"Celo telo · osnovna snaga",ex:[["Čučanj do stolice","3 × 10–12","Spuštaj se kontrolisano; kolena prate pravac stopala."],["Sklekovi uz povišenje","3 × 8–12","Šake na stabilnoj površini; telo u pravoj liniji."],["Glute bridge","3 × 12–15","Podigni kukove i zategni gluteuse bez izvijanja leđa."],["Bird dog","3 × 8 po strani","Ispruži suprotnu ruku i nogu, bez rotacije karlice."],["Plank na kolenima","3 × 20–30 sek","Zategni stomak i drži kičmu neutralno."]],cardio:"10 min laganog hoda: 3–4,5 km/h, nagib 0–1%."},
+{name:"Utorak",short:"UTO",type:"KARDIO",focus:"Aerobna izdržljivost",ex:[],cardio:"35 min: 5 min 3,5 km/h (0%); 20 min 4,5–5,5 km/h (1–2%); 5 min 4 km/h (0–1%); 5 min 3–3,5 km/h (0%). Zatim 10 min mobilnosti."},
+{name:"Sreda",short:"SRE",type:"SNAGA B",focus:"Noge, grudi, leđa i stomak",ex:[["Iskorak unazad uz oslonac","3 × 8 po nozi","Drži se za stolicu; radi samo u bezbolnom opsegu."],["Sklekovi uz povišenje","3 × 8–10","Prilagodi visinu da tehnika ostane pravilna."],["Hip hinge","3 × 12","Guraj kukove unazad uz neutralna leđa."],["Podizanje ruku Y-T u ležećem položaju","2 × 8 svakog oblika","Lagano aktiviraj mišiće oko lopatica."],["Dead bug","3 × 8 po strani","Pokreći suprotnu ruku i nogu, bez odvajanja donjih leđa."]],cardio:"10 min laganog hoda: 3–4,5 km/h, nagib 0–1%."},
+{name:"Četvrtak",short:"ČET",type:"KARDIO + MOBILNOST",focus:"Kontinuirano hodanje i oporavak",ex:[],cardio:"35 min: 5 min 3,5 km/h (0%); 25 min 4,5–5,5 km/h (1–2%); 5 min 3–3,5 km/h (0%). Zatim 10 min mobilnosti."},
+{name:"Petak",short:"PET",type:"SNAGA C",focus:"Celo telo i stabilnost",ex:[["Čučanj do stolice","3 × 10–12","Kontrolisan pokret i stabilna stopala."],["Sklekovi uz povišenje","3 × 8–12","Bez propadanja kukova."],["Glute bridge","3 × 15","Zadrži sekundu na vrhu."],["Bird dog","3 × 8 po strani","Stabilizuj trup."],["Plank na kolenima","3 × 20–30 sek","Ne dozvoli propadanje donjih leđa."]],cardio:"10 min laganog hoda: 3–4,5 km/h, nagib 0–1%."}
+];
+let data=JSON.parse(localStorage.getItem("mypt90")||'{"completed":[],"entries":[],"currentWeight":111,"startWeight":111}');
+let selectedDay=0;
+const $=id=>document.getElementById(id);
+function save(){localStorage.setItem("mypt90",JSON.stringify(data));renderAll()}
+function renderHome(){
+ $("topWeight").textContent=(data.currentWeight||111)+" kg";
+ $("doneCount").textContent=data.completed.length+" / 5";
+ $("weekSummary").innerHTML=plans.map((p,i)=>`<div class="row" style="padding:10px 2px;border-bottom:1px solid var(--line)"><div><b>${p.name}</b><div class="tiny">${p.type}</div></div><span class="tag">${data.completed.includes(i)?"✓ GOTOVO":"PLANIRANO"}</span></div>`).join("");
+ const done=data.completed.length;
+ $("coachMessage").textContent=done===5?"Odličan posao! Pet treninga je evidentirano. Isplaniraj oporavak i zabeleži nedeljno merenje.":`Ove nedelje imaš ${5-done} treninga do cilja. Radi kontrolisano, ostavi 1–3 ponavljanja „u rezervi“ i zabeleži napredak.`;
+}
+function renderWorkout(){
+ $("dayButtons").innerHTML=plans.map((p,i)=>`<button class="daybtn ${i===selectedDay?"selected":""}" data-day="${i}">${p.short}</button>`).join("");
+ document.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>{selectedDay=+b.dataset.day;renderWorkout()});
+ const p=plans[selectedDay];$("dayType").textContent=p.type;$("dayName").textContent=p.name;$("dayFocus").textContent=p.focus;
+ $("exerciseList").innerHTML=p.ex.length?p.ex.map((e,i)=>`<div class="exercise"><div class="row"><strong>${i+1}. ${e[0]}</strong><span class="tag">${e[1]}</span></div><small>${e[2]}</small></div>`).join(""):'<div class="muted">Danas nema vežbi snage. Fokus je na kontrolisanom kardio treningu.</div>';
+ $("cardioPlan").textContent=p.cardio;
+ $("completeWorkout").textContent=data.completed.includes(selectedDay)?"Ukloni oznaku završenog treninga":"Označi trening kao završen";
+ $("workoutStatus").textContent=data.completed.includes(selectedDay)?"Ovaj trening je evidentiran.":"Kada završiš, evidentiraj trening.";
+ $("completeWorkout").onclick=()=>{data.completed=data.completed.includes(selectedDay)?data.completed.filter(x=>x!==selectedDay):[...data.completed,selectedDay];save();renderWorkout()};
+}
+function renderHistory(){
+ $("history").innerHTML=data.entries.length?data.entries.slice().reverse().map(e=>`<div class="log"><b>${e.date}</b><div>${e.weight} kg ${e.waist?`· struk ${e.waist} cm`:""} ${e.steps?`· ${e.steps} koraka`:""}</div><div class="tiny">RPE ${e.rpe}/10 ${e.notes?"· "+escapeHtml(e.notes):""}</div></div>`).join(""):'<div class="muted">Još nema unosa.</div>';
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function renderAll(){renderHome();renderWorkout();renderHistory();$("currentWeight").value=data.currentWeight||111;$("startWeight").value=data.startWeight||111}
+document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{document.querySelectorAll("main section").forEach(s=>s.classList.add("hidden"));$(b.dataset.tab).classList.remove("hidden");document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("active",x===b));if(b.dataset.tab==="progress")renderHistory()});
+$("saveEntry").onclick=()=>{const w=+$("weightInput").value;if(!w||w<35||w>300){alert("Unesi ispravnu težinu.");return}data.currentWeight=w;data.entries.push({date:new Date().toLocaleDateString("sr-RS"),weight:w,waist:$("waistInput").value,steps:$("stepsInput").value,rpe:$("rpeInput").value,notes:$("notesInput").value});save();alert("Merenje je sačuvano na ovom uređaju.")};
+$("getAdvice").onclick=()=>{let e=$("energy").value,s=$("soreness").value,sl=$("sleep").value;let msg;if(s==="high"||e==="low"||sl==="poor")msg="Danas smanji intenzitet. Izaberi laganu šetnju 20–30 minuta ili odmor. Preskoči naporne intervale i trening do otkaza. Ako imaš bol ili se osećaš loše, odmori se.";else if(e==="high"&&s==="none"&&sl==="good")msg="Deluje da si spreman za planirani trening. Drži tehniku urednom i povećaj samo jednu stvar (npr. 1–2 ponavljanja), ne sve odjednom.";else msg="Odradi planirani trening u umerenom intenzitetu. Ostavi 2–3 ponavljanja u rezervi, a kardio drži u tempu u kom možeš da govoriš."; $("advice").textContent=msg};
+$("saveSettings").onclick=()=>{data.currentWeight=+$("currentWeight").value||111;data.startWeight=+$("startWeight").value||111;save();alert("Podešavanja sačuvana.")};
+$("exportData").onclick=()=>{let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="my-personal-trainer-backup.json";a.click();URL.revokeObjectURL(a.href)};
+$("resetData").onclick=()=>{if(confirm("Da li sigurno želiš da obrišeš sve sačuvane podatke?")){data={completed:[],entries:[],currentWeight:111,startWeight:111};save()}};
+renderAll();
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
+</script>
+</body></html>
